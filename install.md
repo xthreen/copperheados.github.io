@@ -12,7 +12,7 @@ description: Instructions on installing, flashing, sideloading and updating Copp
 
 ## Supported devices
 
-CopperheadOS currently has official support for the following devices:
+CopperheadOS is officially supported on the following devices:
 
 * Pixel 2 (walleye)
 * Pixel 2 XL (taimen)
@@ -21,7 +21,7 @@ CopperheadOS currently has official support for the following devices:
 * Pixel 3a (sargo)
 * Pixel 3a XL (bonito)
 
-At one point CopperheadOS was supported on the:
+CopperheadOS has ended support on the following devices:
 
 * HiKey (hikey)
 * HiKey 960 (hikey960)
@@ -30,109 +30,50 @@ At one point CopperheadOS was supported on the:
 * Pixel (sailfish)
 * Pixel XL (marlin)
 
-
-It can be ported to other Android devices with Treble support via the standard [device porting process](/android/docs/building#device-porting-process). Most devices lack support for the
-[security requirements](/android/docs/devices#minimum-requirements-for-copperheados-support)
-needed to match how it works on the officially supported devices.
+CopperheadOS can be ported to other Android devices with Treble support via the standard [device porting process](/android/docs/building#device-porting-process). Most devices do not meet Copperhead [security requirements](/android/docs/devices#minimum-requirements-for-copperheados-support) for official support.
 
 ## Prerequisites
 
-You should have at least 4GB of memory on your computer to avoid problems.
+You will need at least 4GB of memory on your computer.
 
-You can obtain the adb and fastboot tools from the Android SDK. Either install Android Studio or
-use the standalone SDK. Do not use distribution packages for adb and fastboot. Distribution
-packages are out-of-date and not compatible with the latest version of Android. An obsolete
-fastboot will result in corrupted installations and potentially bricked devices. **Do not make the
-common mistake of assuming that everything will be fine and ignoring these instructions.** Double
-check that the first fastboot in your PATH is indeed from an up-to-date SDK installation:
-
-    which fastboot
-
-### Installing platform tools on your Mac, Windows or Linux
-
-Download the latest SDK platform-tools directly from Google [here](https://developer.android.com/studio/releases/platform-tools)
+Download the latest SDK platform-tools directly from Google [here](https://developer.android.com/studio/releases/platform-tools).
 
 To make your life easier, add the directories to your PATH in your shell profile configuration. This
 will make it so you do not have to be inside a specific directory to get access to fastboot.
 
 Adding to your $PATH in [Mac](https://www.architectryan.com/2012/10/02/add-to-the-path-on-mac-os-x-mountain-lion/#.Uydjga1dXDg), [Windows](https://helpdeskgeek.com/windows-10/add-windows-path-environment-variable/) and [Linux](https://opensource.com/article/17/6/set-path-linux).
 
-Check your $PATH by typing `fastboot -h` and see if the output matches ..`usage: fastboot [OPTION...] COMMAND...`
+## Enabling USB Debugging and OEM Unlocking
 
-With your $PATH correct and installation complete, you can now flash factory images
-regardless of the directory.
+USB Debugging and OEM unlocking will need to be enabled on the phone.
 
-### Setting up the SDK on Linux without Android Studio
-To set up a minimal SDK installation without Android Studio on Linux:
-
-    mkdir ~/sdk
-    cd ~/sdk
-    wget https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
-    unzip commandlinetools-linux-6200805_latest.zip
-
-Run an initial update, which will also install platform-tools and patcher;v4:
-
-    tools/bin/sdkmanager --update
-
-For running the Compatibility Test Suite you'll also need the build-tools for aapt:
-
-    tools/bin/sdkmanager 'build-tools;25.0.3'
-
-To make your life easier, add the directories to your PATH in your shell profile configuration:
-
-    export PATH="$HOME/sdk/tools:$HOME/sdk/tools/bin:$HOME/sdk/platform-tools:$HOME/sdk/build-tools/25.0.3:$PATH"
-    export ANDROID_HOME="$HOME/sdk"
-
-This is not mandatory, since you can run them from ~/sdk/platform-tools directly.
-
-You should update the sdk before use from this point onwards:
-
-    sdkmanager --update
-
-## Enabling OEM unlocking
-
-OEM unlocking needs to be enabled from within the operating system.
-
-Enable the developer settings menu by going to Settings -> About device and pressing on the build
+Enable the developer settings menu by going to Settings -> About phone and pressing on the build
 number menu entry until developer mode is enabled.
 
-Next, go to Settings -> Developer settings and toggle on the 'Enable OEM unlocking' setting.
+Next, go to Settings -> System -> Advanced -> Developer options -> and toggle on Enable OEM Unlocking, then scroll further
+down the menu and toggle on USB Debugging. Confirm your action with "Okay" on the following dialog box.
 
-## Updating stock before using fastboot
-
-It's important to have the latest bootloader firmware before installing CopperheadOS, due to bug
-fixes for the fastboot mode used to flash CopperheadOS. There are known issues with older versions
-of the bootloader that are likely to cause problems.
-
-If you're only behind one release, updating within the stock OS makes sense to get an incremental
-update. If you're behind multiple releases, updating within the OS will usually require installing
-multiple updates to catch up to the current state of things. The quickest way to deal with that if
-you have plenty of bandwidth is [sideloading the latest full over-the-air update from
-Google](https://developers.google.com/android/ota).
-
-## Obtaining factory images
-
-The initial install should be performed by flashing the factory images. This will replace the
-existing OS installation and wipe all the existing data.
+Now connect your phone to the computer, if you have not done so already. Unlock the phone if it is locked. You will need
+to give permission on the phone to allow the computer to run the rest of the install process.
 
 ### Latest CopperheadOS images
 
-CopperheadOS currently provides factory images to the [Copperhead Partner network](https://copperhead.co/partners) and is not open
-to the public for download.
-
-### Legacy installation information (Nexus)
-At one point Copperhead supported public downloading of official Nexus factory images on a [releases page](https://copperhead.co/android/releases). Public factory had to be unfortunately images removed because of mass violation of Copperhead's non-Commercial licensing.
+CopperheadOS currently provides factory images to the [Copperhead Partner network](https://copperhead.co/partners) and is not open to the public for download.
 
 ## Flashing factory images
 
-First, boot into the bootloader interface. You can do this by turning off the device and then
-turning it on by holding both the Volume Down and Power buttons. Alternatively, you can use ```adb
-reboot bootloader``` from Android.
+First, boot into the bootloader interface, using ```adb
+reboot bootloader``` in your terminal of choice.
+
+Alternatively, you can do this by powering off the device and then
+powering it on while holding both the Volume Down and Power buttons.
 
 ### Supported devices unlocking directions
 The bootloader now needs to be unlocked to allow flashing new images:
 
     fastboot flashing unlock
+
+This command needs to be confirmed on the phone.
 
 ### Legacy Pixel 2 XL bootloader unlocking directions
 On some older models of Pixel 2 XL it's necessary to unlock the
@@ -140,7 +81,9 @@ critical partitions.
 
     fastboot flashing unlock_critical
 
-The command needs to be confirmed on the device.
+This command needs to be confirmed on the phone.
+
+## Flashing factory images
 
 Next, extract the factory images and run the script to flash them. Extracting the factory images
 depends on the OS you're using and the applications available.
@@ -157,33 +100,21 @@ space in a temporary directory, which defaults to ```/tmp```:
     tar xvf $DEVICE-factory-$DATE.tar.gz
     cd $DEVICE-factory-$DATE
     ./flash-all.sh
+    
+In Windows run ```./flash-all.bat```
 
 Use a different temporary directory if your ```/tmp``` doesn't have 2GiB available:
 
     mkdir tmp
     TMPDIR=$PWD/tmp ./flash-all.sh
 
-You should now proceed to locking the bootloader before using the device as locking wipes the data
-again.
+Now proceed to locking the bootloader before using the phone. User data will be erased in a factory
+reset when the bootloader is locked or unlocked.
 
-## Pixel 3/3a: setting custom AVB key
+## Setting custom AVB key
 
-The custom AVB key for Pixel 3 and 3a series should automatically
+The custom AVB key for supported Pixel series phones should automatically
 be set upon flashing.
-
-## Pixel 2 and 2 XL: Setting custom AVB key
-
-* [Pixel 2 AVB key available here](https://releases.copperhead.co/images/walleye-avb_pkmd.bin)
-* [Pixel 2XL AVB key available here](https://releases.copperhead.co/images/taimen-avb_pkmd.bin)
-
-On the Pixel 2 and Pixel 2 XL, the public key needs to be set for Android Verified Boot 2.0 before
-locking the bootloader again
-
-    fastboot flash avb_custom_key $DEVICE-avb_pkmd.bin
-
-To confirm that the key is set, verify that ```avb_user_settable_key_set``` is ```yes```:
-
-    fastboot getvar avb_user_settable_key_set
 
 ## Locking the bootloader
 
@@ -198,18 +129,11 @@ Reboot into the bootloader menu and set it to locked:
 
     fastboot flashing lock
 
-The command needs to be confirmed on the device since it needs to perform a factory reset.
-
-### Legacy bootloader locking
-
-If your Pixel 2 XL is the same older model that requires unlocking of the critical_partition,
-lock the critical_partitions again:
-
-    fastboot flashing lock_critical
-
+The command needs to be confirmed on the phone. A factory reset will be performed.
 
 ### Post installation precautions
-OEM unlocking should be disabled again in the developer settings menu within the operating system.
+
+OEM unlocking should be disabled again in the developer settings menu on the phone.
 This prevents unlocking the bootloader without access to the owner account. CopperheadOS prevents
 bypassing the OEM unlocking toggle by wiping the data partition from the hidden recovery menu,
 unlike stock Android.  You can still trigger factory resets from within the OS. Note that this
@@ -217,12 +141,11 @@ means that recovering a device with a forgotten password is not possible without
 it, which is the main purpose of this feature (anti-theft).  Stock Android can be more forgiving
 because it's tied to a Google account.
 
-**Note: Unlocking the bootloader again will perform a factory reset. Do not plan to do
-so unless otherwise requried.**
+**Note: Unlocking the bootloader again will erase all user data. Only unlock the bootloader if
+it is absolutely necessary.**
 
 You should now disable OEM unlocking and factory reset the CopperheadOS device
 for optimal hardware security.
-
 
 
 ## Updating
@@ -252,14 +175,3 @@ Finally, select the "Apply update from ADB" option in the recovery menu and side
 with adb:
 
     adb sideload $DEVICE-ota_update-$DATE.zip
-
-## Clearing custom AVB key
-
-On the Pixel 2 and Pixel 2 XL, reverting back to stock requires clearing the configured public
-key after unlocking the bootloader and before locking it again with the stock factory images:
-
-    fastboot erase avb_custom_key
-
-To confirm that the key is unset, verify that ```avb_user_settable_key_set``` is ```no```:
-
-    fastboot getvar avb_user_settable_key_set
