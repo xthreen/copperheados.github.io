@@ -135,6 +135,10 @@ surface](https://android-developers.googleblog.com/2017/07/shut-hal-up.html).
 
 | Device     | Verified boot | Rollback protection | Key enforcement         | OS public key fingerprint display   | A/B update support | Serial debugging while locked | OEM unlocking toggle | Anti-theft protection |
 | ---------- | ------------- | ------------------- | ----------------------- | ----------------------------------- | ------------------ | ----------------------------- | -------------------- | --------------------- |
+| Pixel 3aXL | Full          | Yes                 | Direct + via encryption | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
+| Pixel 3a   | Full          | Yes                 | Direct + via encryption | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
+| Pixel 3 XL | Full          | Yes                 | Direct + via encryption | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
+| Pixel 3    | Full          | Yes                 | Direct + via encryption | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
 | Pixel 2 XL | Full          | Yes                 | Direct + via encryption | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
 | Pixel 2    | Full          | Yes                 | Direct + via encryption | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
 | Pixel XL   | Full          | No                  | Only via encryption     | Strong implementation in progress   | Yes                | Restricted                    | Yes                  | Yes                   |
@@ -165,6 +169,10 @@ system.
 
 | Device     | Vendor           | Robust scanning MAC randomization | Robust associated MAC randomization               |
 | ---------- | ---------------- | --------------------------------- | ------------------------------------------------- |
+| Pixel 3aXL | Qualcomm Atheros | Yes                               | Yes, but only at boot for now (CopperheadOS only) |
+| Pixel 3a   | Qualcomm Atheros | Yes                               | Yes, but only at boot for now (CopperheadOS only) |
+| Pixel 3 XL | Qualcomm Atheros | Yes                               | Yes, but only at boot for now (CopperheadOS only) |
+| Pixel 3    | Qualcomm Atheros | Yes                               | Yes, but only at boot for now (CopperheadOS only) |
 | Pixel 2 XL | Qualcomm Atheros | Yes                               | Yes, but only at boot for now (CopperheadOS only) |
 | Pixel 2    | Qualcomm Atheros | Yes                               | Yes, but only at boot for now (CopperheadOS only) |
 | Pixel XL   | Qualcomm Atheros | Yes                               | Yes (CopperheadOS only)                           |
@@ -189,6 +197,10 @@ way to achieve the desired results via the standard MAC changing API.
 
 | Device     | Key / verified boot attestation | Disk encryption keys     | Disk encryption key tied to verified boot key |
 | ---------- | ------------------------------- | ------------------------ | --------------------------------------------- |
+| Pixel 3aXL | Yes                             | Encrypted by TEE         | Yes                                           |
+| Pixel 3a   | Yes                             | Encrypted by TEE         | Yes                                           |
+| Pixel 3 XL | Yes                             | Encrypted by TEE         | Yes                                           |
+| Pixel 3    | Yes                             | Encrypted by TEE         | Yes                                           |
 | Pixel 2 XL | Yes                             | Encrypted by TEE         | Yes                                           |
 | Pixel 2    | Yes                             | Encrypted by TEE         | Yes                                           |
 | Pixel XL   | Partial                         | Encrypted by TEE         | Yes                                           |
@@ -202,6 +214,10 @@ way to achieve the desired results via the standard MAC changing API.
 
 | Device     | Hardware key escrow for authentication / encryption |
 | ---------- | --------------------------------------------------- |
+| Pixel 3aXL | Yes                                                 |
+| Pixel 3a   | Yes                                                 |
+| Pixel 3 XL | Yes                                                 |
+| Pixel 3    | Yes                                                 |
 | Pixel 2 XL | Yes                                                 |
 | Pixel 2    | Yes                                                 |
 | Pixel XL   | No                                                  |
@@ -233,6 +249,10 @@ longer crippled by a lackluster API at the boundary with the OS.
 
 | Device     | Memory standard | TRR | ECC | Rowhammer susceptibility |
 | ---------- | --------------- | --- | --- | -------------------------|
+| Pixel 3aXL | LPDDR4          | Yes | No  | Moderate (varies)        |
+| Pixel 3a   | LPDDR4          | Yes | No  | Moderate (varies)        |
+| Pixel 3 XL | LPDDR4          | Yes | No  | Moderate (varies)        |
+| Pixel 3    | LPDDR4          | Yes | No  | Moderate (varies)        |
 | Pixel 2 XL | LPDDR4          | Yes | No  | Moderate (varies)        |
 | Pixel 2    | LPDDR4          | Yes | No  | Moderate (varies)        |
 | Pixel XL   | LPDDR4          | Yes | No  | Moderate (varies)        |
@@ -297,6 +317,10 @@ client on CopperheadOS Nexus devices cannot perform updates if it's enabled.
 
 | Device     | Mode |
 | ---------- | ---- |
+| Pixel 3aXL | FBE  |
+| Pixel 3a   | FBE  |
+| Pixel 3 XL | FBE  |
+| Pixel 3    | FBE  |
 | Pixel 2 XL | FBE  |
 | Pixel 2    | FBE  |
 | Pixel XL   | FBE  |
